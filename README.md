@@ -1,41 +1,8 @@
-# GRBL SIM 
+# grbl-sim adapted (badly) for grbl-Mega-5X (5 axes)
+1. Spindle probably won't work - I didn't need it to for my project
+2. Axes A and B will output steps to file, however incorrectly (should only be used to verify something is happening)
+3. There are probably 928475 other issues that I haven't found
+4. I have pre-compiled the `grbl_sim.exe`, and I'm using a custom `simport.sh` (both are found in grbl_sim folder)
+5. I won't be maintaining this, sorry :)
 
-: by Jens Geisler, Adam Shelly  
-
-
-This repository contains an experimental Grbl simulator that compiles the main Grbl source code into a wrapped executable for use on a computer. No Arduino required. When the executable is run, the user should be able to interact with the Grbl simulator as if connected to an Arduino with Grbl.
-
-*WARNING: Grbl Sim is under heavy development.* So many things may not work, or respond in ways unexpected. At the moment, this code is a proof-of-concept.
-
-## What can you do with Grbl Sim? 
-
- - Simply check out how Grbl works without needing an Arduino.
- - Visualize a g-code program by having the simulator parse and execute to a GUI. Fluctuations in feed rates by the acceleration planner can be viewed as well.
- - A powerful debugging tool for development.
- - Each of the AVR functions are replaced with dummy functions, like the stepper ISR. These could be written to do whatever you need. For example, output simulated step pulses over time and examine its performance.
- - On Linux, hook it to a fake serial port (/dev/ttyFAKE) and use it to test your Grbl interface software:
-
-  -  `> socat PTY,raw,link=/dev/ttyFAKE,echo=0 "EXEC:'./grbl_sim.exe -n -s step.out -b block.out',pty,raw,echo=0" `
-
- 
-### Realtime modifications:
-
-  Now simulates Atmel hardware in separate thread.  Runs in *aproximate* realtime.  Emphasis on  * **Approximate** *.  Work is underway to speed it up.
-
-## How do you compile Grbl Sim?
-
-- Clone this repository into the directory containing the Grbl source code.  (should be `<repo>/grbl`).  
-
-- Edit the Grbl-Sim Makefile to select the correct `PLATFORM =`  line.  LINUX and WINDOWS are currently supported. 
-
- - *(You may need to make other modifications to the Makefile and some environment variables for your particular machine. Please share any modifications you find)*
-
-- Run `> make new` to compile Grbl Sim!  
-
-
-
-## Validator
-**NEW** 
-
-Run `gvalidate.exe GCODE_FILE` to validate that grbl will parse your GCODE with no errors.
-
+Based on v1.1l.20190605
